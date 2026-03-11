@@ -11,7 +11,7 @@ process ONSITE {
     tuple val(meta), path(mzml_file), path(id_file)
 
     output:
-    tuple val(meta), path("${id_file.baseName}_*.idXML"), emit: ptm_in_id_onsite
+    tuple val(meta), path("${task.ext.prefix ?: meta.id}_*.idXML"), emit: ptm_in_id_onsite
     path "versions.yml", emit: versions
     path "*.log", emit: log
 
@@ -112,11 +112,11 @@ process ONSITE {
     }
 
     """
-    ${algorithm_cmd.trim()} 2>&1 | tee ${id_file.baseName}_${algorithm}.log
+    ${algorithm_cmd.trim()} 2>&1 | tee ${prefix}_${algorithm}.log
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        onsite: \$(onsite --version 2>&1 | grep -oP 'version \\K[0-9.]+' || echo "unknown")
+        onsite: \$(onsite --version 2>&1 | grep -oE 'version \\K[0-9.]+' || echo "unknown")
         algorithm: ${algorithm}
     END_VERSIONS
     """
