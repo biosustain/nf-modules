@@ -48,7 +48,7 @@ process ONSITE {
         onsite ascore \\
             -in ${mzml_file} \\
             -id ${id_file} \\
-            -out ${id_file.baseName}_ascore.idXML \\
+            -out ${prefix}_ascore.idXML \\
             --fragment-mass-tolerance ${fragment_tolerance} \\
             --fragment-mass-unit ${fragment_unit}${optional_flags ? ' \\\n            ' + optional_flags : ''}
         """
@@ -60,7 +60,7 @@ process ONSITE {
         onsite phosphors \\
             -in ${mzml_file} \\
             -id ${id_file} \\
-            -out ${id_file.baseName}_phosphors.idXML \\
+            -out ${prefix}_phosphors.idXML \\
             --fragment-mass-tolerance ${fragment_tolerance} \\
             --fragment-mass-unit ${fragment_unit}${optional_flags ? ' \\\n            ' + optional_flags : ''}
             ${args}
@@ -90,7 +90,7 @@ process ONSITE {
         onsite lucxor \\
             -in ${mzml_file} \\
             -id ${id_file} \\
-            -out ${id_file.baseName}_lucxor.idXML \\
+            -out ${prefix}_lucxor.idXML \\
             --fragment-method ${fragment_method} \\
             --fragment-mass-tolerance ${fragment_tolerance} \\
             --fragment-error-units ${fragment_unit} \\
