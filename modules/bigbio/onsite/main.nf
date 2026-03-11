@@ -1,5 +1,5 @@
 process ONSITE {
-    tag "$meta.mzml_id"
+    tag "$meta.id"
     label 'process_medium'
     label 'onsite'
 
@@ -20,7 +20,7 @@ process ONSITE {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.mzml_id}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
 
     // Algorithm selection: lucxor (default), ascore, or phosphors
     def algorithm = params.onsite_algorithm ?: 'lucxor'
